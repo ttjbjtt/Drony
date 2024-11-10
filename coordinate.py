@@ -4,7 +4,7 @@ import numpy as np
 from charset_normalizer.md__mypyc import exports
 
 from app import GPSData
-# (x, y):객체의 픽셀좌표 gpsData:드론의 위경도 좌표,드론 고도,헤딩방향 클래스
+# (x, y):객체의 픽셀 좌표 gpsData:드론의 위경도 좌표,드론 고도,헤딩 방향 클래스
 def CalculateCoordinate(x, y, gpsData: GPSData): #좌표계산 함수
     # 각도를 라디안으로 변환
     CameraAngle = math.radians(30)  # 카메라 기울기(임의 설정)
@@ -59,6 +59,7 @@ def CalculateCoordinate(x, y, gpsData: GPSData): #좌표계산 함수
 
     Object = [ObjectLAT, ObjectLNG]
 
+    #지도 생성(지도 중심==드론좌표==파란마크 실종자==빨간 마크)
     m = folium.Map(location=[DroneLAT, DroneLNG], zoom_start=18)
     folium.Marker(location=[DroneLAT, DroneLNG], popup="드론 위치", icon=folium.Icon(color="blue")).add_to(m)
     folium.Marker(Object, popup="실종자 위치", icon=folium.Icon(color="red")).add_to(m)
