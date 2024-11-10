@@ -62,6 +62,6 @@ def CalculateCoordinate(x, y, gpsData: GPSData): #좌표계산 함수
     m = folium.Map(location=[DroneLAT, DroneLNG], zoom_start=18)
     folium.Marker(location=[DroneLAT, DroneLNG], popup="드론 위치", icon=folium.Icon(color="blue")).add_to(m)
     folium.Marker(Object, popup="실종자 위치", icon=folium.Icon(color="red")).add_to(m)
-    m.save('./static/index.html')
+    m.save('./map/map.html')
 
     return Object
