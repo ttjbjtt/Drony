@@ -63,7 +63,7 @@ async def receive_gps_data(data: GPSData):
             # 좌표 계산(객체 좌표로 수정해야 함)
             # CalculateCoordinate(5000, 300, data)
             # 경계상자의 갯수 = len(center_coordinates)
-            CalculateCoordinate(center_coordinates[0]["center_x"], center_coordinates[0]["center_y"])
+            CalculateCoordinate(center_coordinates[0]["center_x"], center_coordinates[0]["center_y"], data)
 
         print(f"Image saved as {image_filename}")
 
