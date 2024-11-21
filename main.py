@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from data_handler import Data, receive_data
 from image_handler import list_images, get_image
+from fastapi.responses import HTMLResponse
 
 # FastAPI 앱 초기화
 app = FastAPI()
@@ -19,6 +20,14 @@ async def list_images_endpoint():
 @app.get("/images/{image_name}")
 async def get_image_endpoint(image_name: str):
     return await get_image(image_name)
+
+# HTML 파일을 반환하는 루트 경로 응답
+# /result에서 html 파일 열기
+@app.get("/result", response_class=HTMLResponse)
+async def read_index():
+    with open("map/map.html", "r", encoding="utf-8") as file:
+        html_content = file.read()
+    return HTMLResponse(content=html_content)
 
 # FastAPI 애플리케이션 실행
 if __name__ == "__main__":
