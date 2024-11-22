@@ -57,7 +57,7 @@ def CalculateCoordinate(x, y, gpsData: Data): #좌표계산 함수
     bounds = [[Object[0]-0.001, Object[1]-0.002], [Object[0], Object[1]]]
 
 
-    #이미지 디코딩
+    #이미지로 디코딩
     if gpsData.image.startswith("data:image"):
         gpsData.image = gpsData.image.split(",")[1]
 
