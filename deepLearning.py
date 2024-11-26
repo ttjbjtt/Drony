@@ -5,7 +5,7 @@ import cv2
 import numpy as np
 import base64
 
-def detect_and_draw_boxes2(image_data, yolo_model):
+def detect_and_draw_boxes(image_data, yolo_model):
     try:
         # PIL 이미지로 변환 (BytesIO 사용)
         image = Image.open(BytesIO(image_data))

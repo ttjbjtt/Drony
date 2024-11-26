@@ -52,7 +52,7 @@ async def receive_data(data: Data):
 
         # YOLO 모델을 사용한 객체 감지
         try:
-            encoded_image, center_coordinates = detect_and_draw_boxes2(image_data, model_path)
+            encoded_image, center_coordinates = detect_and_draw_boxes(image_data, model_path)
             print(f"YOLO detection completed. Objects detected: {len(center_coordinates)}")
         except Exception as e:
             print(f"Error during YOLO detection: {e}")
