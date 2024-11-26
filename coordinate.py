@@ -18,12 +18,9 @@ def CalculateCoordinate(x, y, gpsData: Data):  # 좌표 계산 함수
         IH = 6120  # 촬영된 이미지의 픽셀 가로 세로(임의 설정)
 
         # 드론 고도, 위경도
-        height = gpsData.altitude
+        height = 6
         DroneLAT = gpsData.latitude
         DroneLNG = gpsData.longitude
-
-        if height <= 0:
-            raise ValueError("드론 고도가 0보다 작거나 같습니다.")
 
         # 가장 먼 촬영 지점까지 거리, 가장 가까운 촬영 지점까지 거리
         dFar = height * (math.cos(CameraAngle) + math.tan(verticalFov / 2) * math.sin(CameraAngle)) / (
