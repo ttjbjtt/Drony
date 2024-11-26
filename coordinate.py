@@ -6,7 +6,7 @@ from folium.raster_layers import ImageOverlay
 from folium.plugins import FloatImage  # 이미지 위치 고정
 import base64
 
-def CalculateCoordinate(x, y, gpsData: Data):  # 좌표 계산 함수
+def CalculateCoordinate(x, y, gpsData: Data, Image):  # 좌표 계산 함수
     try:
         # 각도를 라디안으로 변환
         CameraAngle = math.radians(30)  # 카메라 기울기(임의 설정)
@@ -61,7 +61,7 @@ def CalculateCoordinate(x, y, gpsData: Data):  # 좌표 계산 함수
             gpsData.image = gpsData.image.split(",")[1]
 
         try:
-            image = base64.b64decode(gpsData.image)
+            image = base64.b64decode(Image)
             with open("./map/drone_image.png", "wb") as file:
                 file.write(image)
         except base64.binascii.Error:
