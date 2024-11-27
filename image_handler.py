@@ -55,16 +55,20 @@ async def list_images():
     
 # 특정 이미지를 반환하는 함수
 async def get_image(image_name: str, folder: str):
-    # 폴더 선택
-    if folder == "general":
-        image_path = os.path.join(IMAGE_FOLDER, image_name)
-    elif folder == "detected":
-        image_path = os.path.join(DETECTED_DIR, image_name)
+    # 폴더 매핑
+    if folder == "received_images":
+        image_path = os.path.join(config.SAVE_DIR, image_name)
+    elif folder == "DETECTED_DIR":
+        image_path = os.path.join(config.DETECTED_DIR, image_name)
     else:
         raise HTTPException(status_code=400, detail="Invalid folder specified")
 
-    # 이미지 파일 확인
-    if not os.path.exists(image_path):
-        raise HTTPException(status_code=404, detail="Image not found")
+    # 디버깅: 요청된 경로 출력
+    print(f"Requested folder: {folder}, Resolved path: {image_path}")
 
+    # 이미지 존재 여부 확인
+    if not os.path.exists(image_path):
+        raise HTTPException(status_code=404, detail=f"Image not found at path: {image_path}")
+
+    # 이미지 반환
     return FileResponse(image_path)
