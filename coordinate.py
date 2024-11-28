@@ -9,7 +9,7 @@ import base64
 def CalculateCoordinate(x, y, gpsData: Data, Image):  # 좌표 계산 함수
     try:
         # 각도를 라디안으로 변환
-        CameraAngle = math.radians(30)  # 카메라 기울기(임의 설정)
+        CameraAngle = math.radians(45)  # 카메라 기울기(임의 설정)
         horizontalFov = math.radians(84)  # 수평 화각
         verticalFov = math.radians(62)  # 수직 화각
         heading = math.radians(gpsData.heading)  # 드론 헤딩 방향
