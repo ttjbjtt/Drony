@@ -1,14 +1,33 @@
 from io import BytesIO
-from PIL import Image
+from PIL import Image, ExifTags
 from ultralytics import YOLO
 import cv2
 import numpy as np
 import base64
 
+def correct_image_orientation(image):
+    try:
+        for orientation in ExifTags.TAGS.keys():
+            if ExifTags.TAGS[orientation] == 'Orientation':
+                break
+        exif = image._getexif()
+        if exif is not None:
+            orientation_value = exif.get(orientation, None)
+            if orientation_value == 3:
+                image = image.rotate(180, expand=True)
+            elif orientation_value == 6:
+                image = image.rotate(270, expand=True)
+            elif orientation_value == 8:
+                image = image.rotate(90, expand=True)
+    except Exception as e:
+        print(f"Error correcting orientation: {e}")
+    return image
+
 def detect_and_draw_boxes(image_data, yolo_model):
     try:
         # PIL 이미지로 변환 (BytesIO 사용)
         image = Image.open(BytesIO(image_data))
+        image = correct_image_orientation(image)
     except Exception as e:
         raise ValueError(f"Failed to open image data: {e}")
 
